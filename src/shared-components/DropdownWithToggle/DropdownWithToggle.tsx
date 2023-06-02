@@ -11,6 +11,7 @@ export interface IDropdownWithToggleProps {
   items: IDropdownOption[];
   onSelectOption?: (value: string, name: string) => void;
   isLabelAndValueNotSame?: boolean;
+  className?: string;
 }
 
 export interface IDropdownOption {
@@ -28,6 +29,7 @@ export const DropdownWithToggle: React.FC<IDropdownWithToggleProps> = ({
   onSelectOption,
   name,
   isLabelAndValueNotSame,
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>();
 
@@ -82,6 +84,7 @@ export const DropdownWithToggle: React.FC<IDropdownWithToggleProps> = ({
       toggle={dropdownToggle}
       isOpen={isOpen}
       dropdownItems={getItems(items)}
+      className={className}
     />
   );
 };

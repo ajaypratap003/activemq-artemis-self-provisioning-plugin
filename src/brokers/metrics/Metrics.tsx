@@ -3,7 +3,7 @@ import {
   CardBrokerMemoryUsageMetricsContainer,
   CardBrokerMemoryUsageMetricsContainerProps,
   CardBrokerCPUUsageMetricsContainer,
-  MetricsActions,
+  ToolbarMetrics,
 } from './components';
 import { parsePrometheusDuration } from '../../utils';
 import { MetricsLayout } from './components/MetricsLayout/MetricsLayout';
@@ -42,12 +42,15 @@ export const Metrics: FC<MetricsProps> = ({ name, namespace, size }) => {
           timespan={parsePrometheusDuration(span)}
         />
       }
-      metricsActions={
-        <MetricsActions
+      toolbarMetrics={
+        <ToolbarMetrics
           pollingTime={pollTime}
           span={span}
           onSelectOptionPolling={onSelectOptionPolling}
           onSelectOptionSpan={onSelectOptionSpan}
+          // isRefreshing={isRefreshing}
+          // lastUpdated={lastUpdated}
+          // onRefresh={onRefresh}
         />
       }
     />

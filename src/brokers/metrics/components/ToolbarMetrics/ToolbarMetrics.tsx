@@ -1,23 +1,33 @@
 import { FC } from 'react';
-import { Card, CardActions, CardHeader } from '@patternfly/react-core';
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  Toolbar,
+  ToolbarContent,
+} from '@patternfly/react-core';
 import {
   DropdownWithToggle,
   IDropdownOption,
 } from '../../../../shared-components';
 import { useTranslation } from '../../../../i18n';
+import { ToolbarRefresh, ToolbarRefreshProps } from './ToolbarRefresh';
 
-export type MetricsActionsProps = {
+export type ToolbarMetricsProps = {
   pollingTime: string;
   span: string;
   onSelectOptionPolling: (value: string) => void;
   onSelectOptionSpan: (value: string) => void;
-};
+} & Omit<ToolbarRefreshProps, 'ariaLabel'>;
 
-export const MetricsActions: FC<MetricsActionsProps> = ({
+export const ToolbarMetrics: FC<ToolbarMetricsProps> = ({
   pollingTime,
   span,
   onSelectOptionPolling,
   onSelectOptionSpan,
+  isRefreshing,
+  lastUpdated,
+  onRefresh,
 }) => {
   const { t } = useTranslation();
 
@@ -169,22 +179,33 @@ export const MetricsActions: FC<MetricsActionsProps> = ({
     <Card isFullHeight>
       <CardHeader>
         <CardActions>
-          <DropdownWithToggle
-            id="span-dropdown"
-            toggleId="span-dropdowntoggle"
-            items={spanDropdownItems}
-            value={span}
-            onSelectOption={onSelectOptionSpan}
-            isLabelAndValueNotSame={true}
-          />
-          <DropdownWithToggle
-            id="polling-dropdown"
-            toggleId="polling-dropdowntoggle"
-            items={pollingDropdownItems}
-            value={pollingTime}
-            onSelectOption={onSelectOptionPolling}
-            isLabelAndValueNotSame={true}
-          />
+          <Toolbar>
+            <ToolbarContent>
+              <DropdownWithToggle
+                id="span-dropdown"
+                toggleId="span-dropdowntoggle"
+                items={spanDropdownItems}
+                value={span}
+                onSelectOption={onSelectOptionSpan}
+                isLabelAndValueNotSame={true}
+                className="pf-u-mx-md"
+              />
+              <DropdownWithToggle
+                id="polling-dropdown"
+                toggleId="polling-dropdowntoggle"
+                items={pollingDropdownItems}
+                value={pollingTime}
+                onSelectOption={onSelectOptionPolling}
+                isLabelAndValueNotSame={true}
+              />
+              <ToolbarRefresh
+                isRefreshing={isRefreshing}
+                lastUpdated={lastUpdated}
+                onRefresh={onRefresh}
+                ariaLabel={t('topics_refresh')}
+              />
+            </ToolbarContent>
+          </Toolbar>
         </CardActions>
       </CardHeader>
     </Card>
