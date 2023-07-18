@@ -70,6 +70,7 @@
     "http-server": "14.1.1",
     "husky": "8.0.0",
     "i18next-parser": "7.6.0",
+    "jolokia.js": "^1.7.3-2",
     "js-yaml": "4.1.0",
     "lint-staged": "13.1.0",
     "lodash-es": "^4.17.21",
