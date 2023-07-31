@@ -17,7 +17,7 @@ export const QueueRow: FC<QueueRowProps> = ({
   activeColumnIDs,
   columns,
 }) => {
-  const { name, routingType, autoCreateQueues, autoDeleteQueues, created } =
+  const { name, routingType, autoCreated, autoDelete } =
     obj;
   const { t } = useTranslation();
   return (
@@ -29,14 +29,14 @@ export const QueueRow: FC<QueueRowProps> = ({
         {routingType}
       </TableData>
       <TableData id={columns[2].id} activeColumnIDs={activeColumnIDs}>
-        {autoCreateQueues ? t('yes') : t('no')}
+        {autoCreated ? t('yes') : t('no')}
       </TableData>
       <TableData id={columns[3].id} activeColumnIDs={activeColumnIDs}>
-        {autoDeleteQueues ? t('yes') : t('no')}
+        {autoDelete ? t('yes') : t('no')}
       </TableData>
-      <TableData id={columns[4].id} activeColumnIDs={activeColumnIDs}>
+      {/* <TableData id={columns[4].id} activeColumnIDs={activeColumnIDs}>
         <Timestamp timestamp={created} />
-      </TableData>
+      </TableData> */}
     </>
   );
 };
